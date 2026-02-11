@@ -1,13 +1,11 @@
 #include <iostream>
 using namespace std;
-
 struct Node{
     int data;
     Node* left;
     Node* right;
 
 };
-
 Node* createNode(int data){
     Node* newNode = new Node();
     newNode->data = data;
@@ -15,7 +13,6 @@ Node* createNode(int data){
     newNode->right = nullptr;
     return newNode;
 }
-
 Node* insert(Node* root, int data){
     if(root == nullptr){
         return createNode(data);
@@ -27,7 +24,6 @@ Node* insert(Node* root, int data){
     }
     return root;
 }
-
 void display(Node* root){
     if(root==nullptr){
         return;
@@ -36,7 +32,6 @@ void display(Node* root){
     cout<<root->data<<" ";
     display(root->right);
 }
-
 int height(Node* root){
     if(root==nullptr){
         return 0;
@@ -45,7 +40,6 @@ int height(Node* root){
     int rightH = height(root->right);
     return max(leftH,rightH)+1;
 }
-
 Node* displayLeafNode(Node* root){
     if(root==nullptr){
         return nullptr;
@@ -57,7 +51,6 @@ Node* displayLeafNode(Node* root){
     displayLeafNode(root->right);
     return root;
 }
-
 Node* copyTree(Node* root){
     if(root==nullptr){
         return nullptr;
@@ -67,27 +60,6 @@ Node* copyTree(Node* root){
     newNode->right = copyTree(root->right);
     return newNode;
 }
-
-Node* preorder(Node* root){
-    if(root==nullptr){
-        return nullptr;
-    }
-    cout<<root->data<<" ";
-    preorder(root->left);
-    preorder(root->right);
-    return root;
-}
-
-Node* postorder(Node* root){
-    if(root==nullptr){
-        return nullptr;
-    }
-    postorder(root->left);
-    postorder(root->right);
-    cout<<root->data<<" ";
-    return root;
-}
-
 int main(){
     Node* root = nullptr;
     Node* newTree = nullptr;
@@ -100,9 +72,7 @@ int main(){
         cout<<"3. Height"<<endl;
         cout<<"4. Display Leaf Nodes"<<endl;
         cout<<"5. Copy Tree"<<endl;
-        cout<<"6. Display - Preorder"<<endl;
-        cout<<"7. Display - Postorder"<<endl;
-        cout<<"8. Exit"<<endl;
+        cout<<"6. Exit"<<endl;
         cout<<"Enter your choice: ";
         cin>>choice;
         switch(choice){
@@ -131,16 +101,6 @@ int main(){
                 cout<<endl;
                 break;
             case 6:
-                cout<<"\nDisplay Tree: (Preorder) ";
-                preorder(root);
-                cout<<endl;
-                break;
-            case 7:
-                cout<<"\nDisplay Tree: (Postorder) ";
-                postorder(root);
-                cout<<endl;
-                break;
-            case 8:
                 cout<<"\nExiting..."<<endl;
                 return 0;
             default:
