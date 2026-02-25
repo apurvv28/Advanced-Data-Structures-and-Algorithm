@@ -22,7 +22,6 @@ int balance(Node* root){
     return root==NULL ? 0 : height(root->l)-height(root->r);
 }
 Node* LL(Node* root){
-    cout<<"LL Rotation (Right Rotation)"<<endl;
     Node* x=root->l;
     Node* y=x->r;
 
@@ -34,7 +33,6 @@ Node* LL(Node* root){
     return x;
 }
 Node* RR(Node* root){
-    cout<<"RR Rotation (Left Rotation)"<<endl;
     Node* x=root->r;
     Node* y=x->l;
 
@@ -57,20 +55,75 @@ Node* insert(Node* root,int data){
     int b=balance(root);
     //LL Right Rotation
     if(b>1&&data<root->l->data){
+        cout << "Performing LL (Right) rotation" << endl;
         return LL(root);
     }
     //RR Left Rotation
     if(b<-1&&data>root->r->data){
+        cout << "Performing RR (Left) rotation" << endl;
         return RR(root);
     }
     //Left after Right Rotation
     if(b>1&&data>root->l->data){
+        cout << "Performing LR rotation" << endl;
         root->l=RR(root->l);
         return LL(root);
     }
     //Right after left rotation
     if(b<-1&&data<root->r->data){
+        cout << "Performing RL rotation" << endl;
         root->r=LL(root->r);
+        return RR(root);
+    }
+    root->height = 1 + max(height(root->l), height(root->r));
+    return root;
+}
+Node* minValueNode(Node* node){
+    Node* current = node;
+    while(current->l != NULL){
+        current = current->l;
+    }
+    return current;
+}
+Node* deleteNode(Node* root, int data){
+    if(root == NULL) return root;
+    if(data < root->data){
+        root->l = deleteNode(root->l, data);
+    }else if(data > root->data){
+        root->r = deleteNode(root->r, data);
+    }else{
+        if(root->l == NULL){
+            Node* temp = root->r;
+            delete root;
+            return temp;
+        }else if(root->r == NULL){
+            Node* temp = root->l;
+            delete root;
+            return temp;
+        }
+        Node* temp = minValueNode(root->r);
+        root->data = temp->data;
+        root->r = deleteNode(root->r, temp->data);
+    }
+    if(root == NULL) return root;
+    root->height = 1 + max(height(root->l), height(root->r));
+    int b = balance(root);
+    if(b > 1 && balance(root->l) >= 0){
+        cout << "Performing LL (Right) rotation after deletion" << endl;
+        return LL(root);
+    }
+    if(b > 1 && balance(root->l) < 0){
+        cout << "Performing LR rotation after deletion" << endl;
+        root->l = RR(root->l);
+        return LL(root);
+    }
+    if(b < -1 && balance(root->r) <= 0){
+        cout << "Performing RR (Left) rotation after deletion" << endl;
+        return RR(root);
+    }
+    if(b < -1 && balance(root->r) > 0){
+        cout << "Performing RL rotation after deletion" << endl;
+        root->r = LL(root->r);
         return RR(root);
     }
     return root;
@@ -84,7 +137,7 @@ void display(Node* root){
 }
 int main(){
     int data;
-    int c;
+    int c=0;
     Node* root=NULL;
     while(c!=4){
         cout<<"Menu :"<<endl;
@@ -97,12 +150,13 @@ int main(){
         switch(c){
             case 1:
                 cout<<"Enter data to insert: "<<endl;
-                insert(root,data);
                 cin>>data;
+                root = insert(root, data);
                 break;
             case 2:
                 cout<<"Enter data to delete: "<<endl;
                 cin>>data;
+                root = deleteNode(root, data);
                 break;
             case 3:
                 cout<<"AVL Tree: "<<endl;
