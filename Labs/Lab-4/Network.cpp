@@ -150,7 +150,6 @@ int main(){
         cout << "7. Exit" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
-
         switch(choice){
             case 1: {
                 cout << "\nDFS Traversal" << endl;
@@ -188,6 +187,5 @@ int main(){
                 cout << "Invalid choice!" << endl;
         }
     }
-
     return 0;
 }

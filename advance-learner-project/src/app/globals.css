@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #FFFEF0;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F5F5F0;
+
+  --color-primary: #FFE500;
+  --color-primary-hover: #FFD000;
+  --color-secondary: #FF6B6B;
+  --color-accent-blue: #4D9FFF;
+  --color-accent-green: #00CC66;
+  --color-accent-orange: #FF9F1C;
+  --color-accent-pink: #FF6B9D;
+  --color-accent-purple: #9B5DE5;
+
+  --color-text-primary: #000000;
+  --color-text-secondary: #222222;
+  --color-text-muted: #555555;
+
+  --color-border: #000000;
+  --color-foreground: #000000;
+}
+
+@layer utilities {
+  .border-brutal {
+    border: 3px solid #000000;
+  }
+  .border-b-brutal {
+    border-bottom: 3px solid #000000;
+  }
+  .border-t-brutal {
+    border-top: 3px solid #000000;
+  }
+  .border-l-brutal {
+    border-left: 3px solid #000000;
+  }
+  .border-r-brutal {
+    border-right: 3px solid #000000;
+  }
+  .border-brutal-thin {
+    border: 2px solid #000000;
+  }
+  .shadow-brutal {
+    box-shadow: 4px 4px 0px #000000;
+  }
+  .shadow-brutal-sm {
+    box-shadow: 2px 2px 0px #000000;
+  }
+  .shadow-brutal-lg {
+    box-shadow: 6px 6px 0px #000000;
+  }
+  .shadow-brutal-xl {
+    box-shadow: 8px 8px 0px #000000;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #F5F5F0;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #F5F5F0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #000000;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #FFE500;
+  color: #000000;
+}
